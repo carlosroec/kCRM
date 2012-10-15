@@ -1,0 +1,17 @@
+#AddHandler application/x-httpd-php53 .php
+
+# compress the files:
+AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript application/x-javascript
+
+<FilesMatch "\.(js|css|png)$">
+	Header set Cache-Control "max-age=604800"
+</FilesMatch>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    RewriteRule ^(.*)$ index.php/$1 [L]
+</IfModule>
